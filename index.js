@@ -1,47 +1,48 @@
 import { useEffect, useState, useRef } from "react";
 
-export function useLangDirection(target) {
-  const [direction, setDirection] = useState(
-    document.getElementsByTagName("html")[0].getAttribute("dir")
-  );
-  const [targetElement, setTargetElement] = useState(
-    document.getElementsByTagName("html")[0]
-  );
+export function useLangDirection() {
+  // Default target
+  // @TODO: add ability to watch any element
+  const element = document.getElementsByTagName("html")[0];
+  // Read and set initial direction from default
+  const [direction, setDirection] = useState(element.getAttribute("dir"));
+  // Store obsever as ref so we can ensure we are cleaning all obvservers up
   const observer = useRef(null);
-  if (target) setTargetElement(target);
-  useEffect(() => {
-    // Callback function to execute when mutations are observed
-    const callback = function (mutationsList, observer) {
-      // Use traditional 'for loops' for IE 11
-      for (let mutation of mutationsList) {
-        if (
-          mutation.type === "attributes" &&
-          mutation.attributeName === "dir"
-        ) {
-          console.log(
-            "The " +
-              mutation.attributeName +
-              " attribute was modified to " +
-              document.getElementsByTagName("html")[0].getAttribute("dir")
-          );
-          setDirection(
-            document.getElementsByTagName("html")[0].getAttribute("dir")
-          );
+
+  useEffect(
+    function () {
+      // Callback function to execute when mutations are observed
+      const callback = function (mutationsList) {
+        // Use traditional 'for loops' for IE 11
+        for (let mutation of mutationsList) {
+          // Check if mutation was our dir attribute
+          if (
+            mutation.type === "attributes" &&
+            mutation.attributeName === "dir" &&
+            mutation.oldValue !== element.getAttribute("dir")
+          ) {
+            // Set the new direction
+            setDirection(element.getAttribute("dir"));
+          }
         }
-      }
-    };
-    if (observer.current) observer.current.disconnect();
-    // Options for the observer (which mutations to observe)
-    const config = { attributes: true };
-    // Create an observer instance linked to the callback function
-    observer.current = new MutationObserver(callback);
+      };
+      // Disconnect any old observers
+      if (observer.current) observer.current.disconnect();
+      // Options for the observer (which mutations to observe)
+      const config = { attributes: true };
+      // Create an observer instance linked to the callback function
+      observer.current = new MutationObserver(callback);
 
-    const { current: currentObserver } = observer;
-    // Start observing the target node for configured mutations
-    currentObserver.observe(targetElement, config);
-
-    return () => currentObserver.disconnect();
-  }, [targetElement, direction]);
-
+      const { current: currentObserver } = observer;
+      // Start observing the target node for configured mutations
+      currentObserver.observe(element, config);
+      // Disconnect on unmount
+      return function () {
+        currentObserver.disconnect();
+      };
+    },
+    [element, direction]
+  );
+  // Return the element direction value
   return direction;
 }
