@@ -15,8 +15,6 @@ jobs:
       if: tag IS present
       node_js: "12"
       script: yarn compile
-      before_deploy:
-        - cd dist
       deploy:
         provider: npm
         email: "$NPM_EMAIL"
