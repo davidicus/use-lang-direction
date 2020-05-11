@@ -42,12 +42,10 @@
     "@babel/preset-react": "^7.9.4",
     "babel-jest": "^26.0.1",
     "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "jest": "^26.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rimraf": "^3.0.2"
-  },
-  "dependencies": {
-    "enzyme-adapter-react-16": "^1.15.2"
   }
 }
