@@ -1,6 +1,6 @@
 {
   "name": "use-lang-direction",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A React hook that reads an element's dir attribute value and any updates to that value",
   "main": "dist/index.js",
   "scripts": {
