@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "yarn build:clean && babel src --out-dir dist",
-    "build:clean": "rimraf dist"
+    "build": "yarn build:clean && babel src --out-dir dist && yarn build:pkg",
+    "build:clean": "rimraf dist",
+    "build:pkg": "babel package.json --out-dir dist --copy-files"
   },
   "repository": {
     "type": "git",
