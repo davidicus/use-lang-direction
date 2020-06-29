@@ -10,7 +10,7 @@ A React hook that reads the HTML element's dir attribute value and any updates t
 
 ```JavaScript
 import React from "react";
-import useLangDirection from "use-lang-direction";
+import { useLangDirection } from "use-lang-direction";
 
 const App = () => {
   const langDir = useLangDirection();
