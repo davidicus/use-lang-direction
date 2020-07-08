@@ -44,5 +44,5 @@ export function useLangDirection() {
     [element, direction]
   );
   // Return the element direction value
-  return direction;
+  return direction || "ltr";
 }

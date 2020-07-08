@@ -1,4 +1,3 @@
-
 import React from "react";
 import { mount } from "enzyme";
 import { useLangDirection } from ".";
@@ -8,7 +7,6 @@ const Component = () => {
   return <input dir={langDir} type="text" />;
 };
 test("Direction should be 'ltr'", () => {
-  document.documentElement.setAttribute("dir", "ltr");
   const wrapper = mount(<Component />);
 
   expect(wrapper.find("input").prop("dir")).toEqual("ltr");
