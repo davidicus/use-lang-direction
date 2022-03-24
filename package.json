@@ -1,8 +1,8 @@
 {
   "name": "use-lang-direction",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "A React hook that reads an element's dir attribute value and any updates to that value",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "yarn build:clean && yarn build:pkg && yarn copy",
@@ -47,5 +47,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rimraf": "^3.0.2"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.17.0"
   }
 }

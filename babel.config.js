@@ -1,13 +1,14 @@
 module.exports = {
   presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
         targets: {
-          browsers: ["last 2 version", "ie >= 11"],
+          browsers: ['last 2 version', 'ie >= 11'],
         },
       },
     ],
-    "@babel/preset-react",
+    '@babel/preset-react',
   ],
+  plugins: ['@babel/plugin-transform-runtime'],
 };

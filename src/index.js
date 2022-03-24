@@ -1,11 +1,10 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from 'react';
 
 export function useLangDirection() {
   // Default target
-  // @TODO: add ability to watch any element
-  const element = document.getElementsByTagName("html")[0];
+  const element = document.getElementsByTagName('html')[0];
   // Read and set initial direction from default
-  const [direction, setDirection] = useState(element.getAttribute("dir"));
+  const [direction, setDirection] = useState(element.getAttribute('dir'));
   // Store obsever as ref so we can ensure we are cleaning all obvservers up
   const observer = useRef(null);
 
@@ -17,12 +16,12 @@ export function useLangDirection() {
         for (let mutation of mutationsList) {
           // Check if mutation was our dir attribute
           if (
-            mutation.type === "attributes" &&
-            mutation.attributeName === "dir" &&
-            mutation.oldValue !== element.getAttribute("dir")
+            mutation.type === 'attributes' &&
+            mutation.attributeName === 'dir' &&
+            mutation.oldValue !== element.getAttribute('dir')
           ) {
             // Set the new direction
-            setDirection(element.getAttribute("dir"));
+            setDirection(element.getAttribute('dir'));
           }
         }
       };
@@ -44,5 +43,5 @@ export function useLangDirection() {
     [element, direction]
   );
   // Return the element direction value
-  return direction || "ltr";
+  return direction || 'ltr';
 }
