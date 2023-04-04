@@ -1,6 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 
 export function useLangDirection() {
+  // Check if we're in the server environment
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    return 'ltr';   
+  }
   // Default target
   const element = document.getElementsByTagName('html')[0];
   // Read and set initial direction from default
